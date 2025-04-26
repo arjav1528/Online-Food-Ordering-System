@@ -200,3 +200,18 @@ The **Online Food Ordering System** is a Java-based application that allows user
     
 
 ---
+
+## Contributors
+
+- Arjav Patel(2023A8PS1140G)
+- Soham Das(2023B2AA0733G)
+- Tanmay Manglik(2023A8PS0514G)
+- Divyanshu Rai(2023AAPS1063G)
+
+## GitHub Repository
+
+You can find the source code and contribute to this project on GitHub:
+[Online-Food-Ordering-System](https://github.com/arjav1528/Online-Food-Ordering-System)
+
+---
+````
