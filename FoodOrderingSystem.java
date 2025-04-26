@@ -16,10 +16,8 @@ public class FoodOrderingSystem {
     public static final String BOLD = "\u001B[1m";
     
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        try {
-            System.out.println("\n" + BOLD + "Welcome to Zomato Food Delivery Service" + RESET);
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("\n" + BOLD + "Welcome to Food Delivery Service" + RESET);
             System.out.println("─".repeat(50));
             
             System.out.println(BOLD + "\n📋 " + CYAN + " USER INFORMATION" + RESET);
@@ -81,9 +79,8 @@ public class FoodOrderingSystem {
             for (int i = 0; i < restaurants.length; i++) {
                 Address restaurantAddress = RestaurantConstants.getRestaurantAddress(restaurants[i]);
                 Restaurant restaurant = new Restaurant(restaurants[i], restaurantAddress, cuisines[i]);
-                // Set some sample values
-                restaurant.setRating((double)(3 + (int)(Math.random() * 20) / 10.0)); // Random rating between 3.0-5.0
-                restaurant.setAveragePrice(200.0 + (Math.random() * 600)); // Random price between 200-800
+                restaurant.setRating((double)(3 + (int)(Math.random() * 20) / 10.0));
+                restaurant.setAveragePrice(200.0 + (Math.random() * 600)); 
                 allRestaurants.add(restaurant);
             }
 
@@ -133,7 +130,6 @@ public class FoodOrderingSystem {
                     System.out.println(GREEN + "  ✓ Filtered by: " + BOLD + selectedCuisine + RESET);
                 }
             } else if (filterChoice == 3) {
-                // Filter by price range
                 System.out.print(BOLD + "  Minimum price (₹): " + RESET);
                 double minPrice = scanner.nextDouble();
                 scanner.nextLine();
@@ -194,30 +190,31 @@ public class FoodOrderingSystem {
             String cuisine;
 
             switch (restaurantChoice) {
-                case 1:
+                case 1 -> {
                     restaurantName = RestaurantConstants.TAJ_RESTAURANT;
                     cuisine = RestaurantConstants.CUISINE_INDIAN;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     restaurantName = RestaurantConstants.MAINLAND_CHINA;
                     cuisine = RestaurantConstants.CUISINE_CHINESE;
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     restaurantName = RestaurantConstants.PIZZA_HUT;
                     cuisine = RestaurantConstants.CUISINE_ITALIAN;
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     restaurantName = RestaurantConstants.BIRYANI_HOUSE;
                     cuisine = RestaurantConstants.CUISINE_HYDERABADI;
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     restaurantName = RestaurantConstants.SUSHI_PALACE;
                     cuisine = RestaurantConstants.CUISINE_JAPANESE;
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println(RED + "  Invalid selection. Defaulting to " + RestaurantConstants.TAJ_RESTAURANT + RESET);
                     restaurantName = RestaurantConstants.TAJ_RESTAURANT;
                     cuisine = RestaurantConstants.CUISINE_INDIAN;
+                }
             }
             
             Address restaurantAddress = RestaurantConstants.getRestaurantAddress(restaurantName);
@@ -487,9 +484,6 @@ public class FoodOrderingSystem {
             
         } catch (Exception e) {
             System.out.println(RED + "\n⚠️ An error occurred: " + e.getMessage() + RESET);
-            e.printStackTrace();
-        } finally {
-            scanner.close();
         }
     }
 }

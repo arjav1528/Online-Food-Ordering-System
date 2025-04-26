@@ -1,14 +1,10 @@
 
 public class CreditCardPayment extends Payment implements PaymentProcessor {
     private String cardNumber;
-    private String cardHolderName;
-    private String cvv;  // Added CVV field
 
     public CreditCardPayment(double amount, String cardNumber, String cardHolderName, String cvv) {
         super(amount);
         this.cardNumber = cardNumber;
-        this.cardHolderName = cardHolderName;
-        this.cvv = cvv;
     }
 
     public CreditCardPayment(double amount, String cardNumber, String cardHolderName) {
