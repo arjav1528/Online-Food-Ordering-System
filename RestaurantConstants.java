@@ -1,26 +1,47 @@
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class RestaurantConstants {    // Restaurant names
+/**
+ * Constants class that stores restaurant information, addresses, and menu details
+ * for the Online Food Ordering System. This class provides utility methods to access
+ * restaurant data.
+ */
+public class RestaurantConstants {
+    /** Restaurant name constant for Taj Restaurant */
     public static final String TAJ_RESTAURANT = "Taj Restaurant";
+    /** Restaurant name constant for Mainland China */
     public static final String MAINLAND_CHINA = "Mainland China";
+    /** Restaurant name constant for Pizza Hut */
     public static final String PIZZA_HUT = "Pizza Hut";
+    /** Restaurant name constant for Biryani House */
     public static final String BIRYANI_HOUSE = "Biryani House";
+    /** Restaurant name constant for Sushi Palace */
     public static final String SUSHI_PALACE = "Sushi Palace";
     
+    /** Cuisine type constant for Indian food */
     public static final String CUISINE_INDIAN = "Indian";
+    /** Cuisine type constant for Chinese food */
     public static final String CUISINE_CHINESE = "Chinese";
+    /** Cuisine type constant for Italian food */
     public static final String CUISINE_ITALIAN = "Italian";
+    /** Cuisine type constant for Hyderabadi food */
     public static final String CUISINE_HYDERABADI = "Hyderabadi";
+    /** Cuisine type constant for Japanese food */
     public static final String CUISINE_JAPANESE = "Japanese";
     
+    /** Map to store restaurant addresses associated with restaurant names */
     private static final Map<String, Address> RESTAURANT_ADDRESSES = new HashMap<>();
     
+    /** Menu ID constant for lunch menu */
     public static final int LUNCH_MENU_ID = 1;
+    /** Menu ID constant for dinner menu */
     public static final int DINNER_MENU_ID = 2;
+    /** Menu ID constant for specials menu */
     public static final int SPECIALS_MENU_ID = 3;
     
+    /**
+     * Static initialization block to populate restaurant addresses
+     */
     static {
         RESTAURANT_ADDRESSES.put(TAJ_RESTAURANT, 
             new Address("123 Food Street", "Mumbai", "Maharashtra", "400001"));
@@ -34,10 +55,23 @@ public class RestaurantConstants {    // Restaurant names
             new Address("88 Ocean Drive", "Kolkata", "West Bengal", "700001"));
     }
     
+    /**
+     * Retrieves the address for a specified restaurant
+     *
+     * @param restaurantName The name of the restaurant to get the address for
+     * @return The Address object associated with the restaurant, or null if not found
+     */
     public static Address getRestaurantAddress(String restaurantName) {
         return RESTAURANT_ADDRESSES.get(restaurantName);
     }
     
+    /**
+     * Generates a menu for a specified restaurant and menu type
+     *
+     * @param restaurantName The name of the restaurant to get the menu for
+     * @param menuId The ID of the menu type (LUNCH_MENU_ID, DINNER_MENU_ID, or SPECIALS_MENU_ID)
+     * @return A Menu object containing menu items for the specified restaurant and menu type
+     */
     public static Menu getRestaurantMenu(String restaurantName, int menuId) {
         Menu menu = new Menu(menuId);
         

@@ -8,14 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Manages the persistence of order history to the file system.
+ * This class handles saving and loading user order histories to/from text files.
+ */
 public class FileOrderHistoryManager {
+    /** Directory where order history files are stored */
     private static final String ORDER_HISTORY_DIR = "orderhistory";
     
-    
+    /**
+     * Loads the order history for a specific user from a file.
+     *
+     * @param userEmail The email of the user whose order history should be loaded
+     * @return A list of orders previously placed by the user
+     */
     public static List<Order> loadOrderHistory(String userEmail) {
         String filename = ORDER_HISTORY_DIR + File.separator + userEmail + ".txt";
         List<Order> previousOrders = new ArrayList<>();
-        
         
         File historyFile = new File(filename);
         if (!historyFile.exists()) {
@@ -23,7 +32,7 @@ public class FileOrderHistoryManager {
         }
         
         try (Scanner scanner = new Scanner(historyFile)) {
-            
+            // TODO: Implement actual parsing of order history from file
             System.out.println("Previous order history found for " + userEmail);
         } catch (IOException e) {
             System.out.println("Error reading order history: " + e.getMessage());
@@ -32,6 +41,13 @@ public class FileOrderHistoryManager {
         return previousOrders;
     }
     
+    /**
+     * Saves the user's order history to a file.
+     * Creates a new file or updates an existing one with the current order history.
+     *
+     * @param user The user whose order history should be saved
+     * @return true if the save operation was successful, false otherwise
+     */
     public static boolean saveOrderHistory(User user) {
         // Create directory if it doesn't exist
         File directory = new File(ORDER_HISTORY_DIR);
@@ -39,9 +55,7 @@ public class FileOrderHistoryManager {
             directory.mkdirs();
         }
         
-       
         String filename = ORDER_HISTORY_DIR + File.separator + user.getEmail() + ".txt";
-        
         
         boolean fileExists = Files.exists(Paths.get(filename));
         if (fileExists) {
@@ -51,7 +65,7 @@ public class FileOrderHistoryManager {
         }
         
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-            
+            // Write user details section
             writer.println("==== USER DETAILS ====");
             writer.println("Name: " + user.getName());
             writer.println("Email: " + user.getEmail());
@@ -61,6 +75,7 @@ public class FileOrderHistoryManager {
             }
             writer.println();
             
+            // Write order history section
             writer.println("==== ORDER HISTORY ====");
             List<Order> orderHistory = user.getOrderHistory();
             

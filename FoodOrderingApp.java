@@ -233,6 +233,10 @@ public class FoodOrderingApp {
             List<MenuItem> menuItems = lunchMenu.getItems();
             String currentCategory = "";
             
+            /**
+             * Displays menu items by category and formats them neatly
+             * Each category is highlighted as a section heading
+             */
             for (int i = 0; i < menuItems.size(); i++) {
                 MenuItem item = menuItems.get(i);
                 
@@ -245,6 +249,12 @@ public class FoodOrderingApp {
                         i + 1, item.getName(), item.getPrice());
             }
             
+            /**
+             * Handles menu item selection process
+             * Allows users to select multiple items from the displayed menu
+             * Items are added to a shopping cart (orderedItems list)
+             * Selection process continues until user enters '0'
+             */
             List<MenuItem> orderedItems = new ArrayList<>();
             boolean orderingComplete = false;
             System.out.println("\n  " + BOLD + "Add items to your cart:" + RESET);
@@ -265,24 +275,45 @@ public class FoodOrderingApp {
                 }
             }
             
-            
+            /**
+             * Validates that at least one item has been ordered
+             * Exits the program if no items were selected
+             * 
+             * @return early if order is empty
+             */
             if (orderedItems.isEmpty()) {
                 System.out.println(YELLOW + "\n⚠️ No items selected. Exiting." + RESET);
                 return;
             }
             
+            /**
+             * Creates a new Order object with selected items
+             * 
+             * @param orderId Unique identifier for this order (1001)
+             * @param user Current user object with personal details
+             * @param orderedItems List of menu items selected by the user
+             */
             Order order = new Order(1001, user, orderedItems);
             
-           
+            /**
+             * Generates and displays order summary
+             * Shows restaurant name, all ordered items, and calculates total price
+             */
             System.out.println(BOLD + "\n🛒 " + BLUE + " YOUR ORDER" + RESET);
             System.out.println("  " + "─".repeat(50));
             System.out.println("  Restaurant: " + BOLD + restaurantName + RESET);
             
+            /**
+             * Calculates the total order amount by iterating through all ordered items
+             * 
+             * @param totalAmount Running sum of all item prices
+             */
             double totalAmount = 0;
             for (MenuItem item : orderedItems) {
                 System.out.printf("  • %-30s ₹%.2f%n", item.getName(), item.getPrice());
                 totalAmount += item.getPrice();
             }
+            
             System.out.println("  " + "─".repeat(50));
             System.out.printf("  " + BOLD + "Total Amount: ₹%.2f%n" + RESET, totalAmount);
             
