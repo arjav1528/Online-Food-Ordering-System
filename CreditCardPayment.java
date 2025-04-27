@@ -35,9 +35,17 @@ public class CreditCardPayment extends Payment implements PaymentProcessor {
      *
      * @param amount The amount to process
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException 
      */
     @Override
-    public boolean process(double amount) {
+    public boolean process(double amount) throws PaymentException {
+        // Fail for a specific test card number
+        if (cardNumber.equals("0000 0000 0000 0000")) {
+            isProcessed = false;
+            
+           throw new PaymentException("Invalid card number", this);
+        }
+        
         isProcessed = true;
         System.out.println("Processing Credit Card Payment of ₹" + amount);
         return true;
@@ -69,9 +77,10 @@ public class CreditCardPayment extends Payment implements PaymentProcessor {
      * Processes the credit card payment with the amount specified during construction.
      *
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException 
      */
     @Override
-    public boolean process() {
+    public boolean process() throws PaymentException {
         return process(this.amount);
     }
 }

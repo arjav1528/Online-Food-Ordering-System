@@ -56,8 +56,9 @@ public class Order {
      * Marks the order as paid if payment is successful.
      *
      * @throws OrderException If payment method is not set (code 401) or if payment fails (code 402)
+     * @throws PaymentException 
      */
-    public void placeOrder() throws OrderException {
+    public void placeOrder() throws OrderException, PaymentException {
         if (paymentMethod == null) {
             throw new OrderException("Payment method not set!", 401);
         }

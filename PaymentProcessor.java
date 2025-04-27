@@ -9,8 +9,9 @@ public interface PaymentProcessor {
      *
      * @param amount The monetary amount to be processed, must be greater than zero
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException 
      */
-    boolean process(double amount);
+    boolean process(double amount) throws PaymentException;
     
     /**
      * Processes a refund for the specified amount.

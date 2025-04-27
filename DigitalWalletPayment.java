@@ -28,9 +28,22 @@ public class DigitalWalletPayment extends Payment implements PaymentProcessor {
      *
      * @param amount The amount to be processed
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException if the wallet ID is invalid or payment processing fails
      */
     @Override
-    public boolean process(double amount) {
+    public boolean process(double amount) throws PaymentException {
+        // Fail for a specific test wallet ID
+        if (walletId.equals("INVALID")) {
+            isProcessed = false;
+            throw new PaymentException("Invalid wallet ID", this);
+        }
+        
+        // Fail if provider is not supported
+        if (provider.equalsIgnoreCase("unsupported")) {
+            isProcessed = false;
+            throw new PaymentException("Unsupported wallet provider", this);
+        }
+        
         isProcessed = true;
         System.out.println("Processing Wallet Payment of ₹" + amount);
         return true;
@@ -63,9 +76,10 @@ public class DigitalWalletPayment extends Payment implements PaymentProcessor {
      * This implementation calls the overloaded process method with the stored amount.
      *
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException if the payment processing fails
      */
     @Override
-    public boolean process() {
+    public boolean process() throws PaymentException {
         return process(this.amount);
     }
 }

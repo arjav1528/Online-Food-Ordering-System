@@ -23,8 +23,9 @@ public abstract class Payment {
      * Processes the payment.
      *
      * @return true if the payment was processed successfully, false otherwise
+     * @throws PaymentException 
      */
-    public abstract boolean process();
+    public abstract boolean process() throws PaymentException;
     
     /**
      * Generates a receipt for the processed payment.
