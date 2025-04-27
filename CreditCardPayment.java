@@ -77,7 +77,6 @@ public class CreditCardPayment extends Payment implements PaymentProcessor {
      *
      * @return A string containing the transaction details
      */
-    @Override
     public String getTransactionDetails() {
         return "Credit Card ending with " + cardNumber.substring(cardNumber.length() - 4);
     }

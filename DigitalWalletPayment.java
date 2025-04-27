@@ -1,7 +1,5 @@
 /**
  * Represents a payment method using digital wallets like PayTM, GPay, etc.
- * This class extends the Payment base class and implements the PaymentProcessor interface
- * to handle wallet-specific payment operations.
  */
 public class DigitalWalletPayment extends Payment implements PaymentProcessor {
     /** The unique identifier of the user's digital wallet */
@@ -71,7 +69,6 @@ public class DigitalWalletPayment extends Payment implements PaymentProcessor {
      *
      * @return A string containing the wallet ID and provider information
      */
-    @Override
     public String getTransactionDetails() {
         return "Wallet ID " + walletId + " (" + provider + ")";
     }

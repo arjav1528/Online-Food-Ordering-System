@@ -21,10 +21,5 @@ public interface PaymentProcessor {
      */
     boolean refund(double amount) throws IllegalArgumentException;
     
-    /**
-     * Retrieves details about the most recent transaction.
-     *
-     * @return A string containing transaction details (ID, timestamp, status, etc.)
-     */
-    String getTransactionDetails();
+    // ...rest of the methods...
 }
