@@ -35,15 +35,19 @@ public class CreditCardPayment extends Payment implements PaymentProcessor {
      *
      * @param amount The amount to process
      * @return true if the payment was processed successfully, false otherwise
-     * @throws PaymentException 
+     * @throws PaymentException if the payment processing fails
+     * @throws IllegalArgumentException if amount is less than or equal to zero
      */
     @Override
-    public boolean process(double amount) throws PaymentException {
+    public boolean process(double amount) throws PaymentException, IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Payment amount must be greater than zero");
+        }
+        
         // Fail for a specific test card number
         if (cardNumber.equals("0000 0000 0000 0000")) {
             isProcessed = false;
-            
-           throw new PaymentException("Invalid card number", this);
+            throw new PaymentException("Invalid card number", this);
         }
         
         isProcessed = true;
@@ -56,9 +60,14 @@ public class CreditCardPayment extends Payment implements PaymentProcessor {
      *
      * @param amount The amount to refund
      * @return true if the refund was processed successfully, false otherwise
+     * @throws IllegalArgumentException if amount is less than or equal to zero
      */
     @Override
-    public boolean refund(double amount) {
+    public boolean refund(double amount) throws IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Refund amount must be greater than zero");
+        }
+        
         System.out.println("Refunded ₹" + amount + " to Credit Card.");
         return true;
     }

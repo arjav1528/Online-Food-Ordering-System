@@ -29,9 +29,14 @@ public class DigitalWalletPayment extends Payment implements PaymentProcessor {
      * @param amount The amount to be processed
      * @return true if the payment was processed successfully, false otherwise
      * @throws PaymentException if the wallet ID is invalid or payment processing fails
+     * @throws IllegalArgumentException if amount is less than or equal to zero
      */
     @Override
-    public boolean process(double amount) throws PaymentException {
+    public boolean process(double amount) throws PaymentException, IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Payment amount must be greater than zero");
+        }
+        
         // Fail for a specific test wallet ID
         if (walletId.equals("INVALID")) {
             isProcessed = false;

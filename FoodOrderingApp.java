@@ -509,12 +509,18 @@ public class FoodOrderingApp {
                 System.out.println("  Your food from " + BOLD + restaurantName + RESET + " will be delivered to:");
                 System.out.println("  " + BOLD + street + ", " + city + RESET);
                 
-            } catch (OrderException e) {
-                System.out.println(RED + "⚠️ Error placing order: " + e.getErrorMessage() + RESET);
+            } catch (IllegalStateException e) {
+                System.out.println(RED + "⚠️ Error placing order: " + e.getMessage() + RESET);
+            } catch (PaymentException e) {
+                System.out.println(RED + "⚠️ Payment error: " + e.getMessage() + RESET);
+            } catch (InterruptedException e) {
+                System.out.println(RED + "⚠️ Operation interrupted: " + e.getMessage() + RESET);
+                Thread.currentThread().interrupt(); // Restore interrupted status
             }
             
         } catch (Exception e) {
-            System.out.println(RED + "\n⚠️ An error occurred: " + e.getMessage() + RESET);
+            System.out.println(RED + "\n⚠️ An unexpected error occurred: " + e.getMessage() + RESET);
+            e.printStackTrace(); // In a real app, you might log this instead
         }
     }
 }

@@ -55,16 +55,16 @@ public class Order {
      * Attempts to place the order by processing payment.
      * Marks the order as paid if payment is successful.
      *
-     * @throws OrderException If payment method is not set (code 401) or if payment fails (code 402)
-     * @throws PaymentException 
+     * @throws IllegalStateException If payment method is not set
+     * @throws PaymentException If the payment processing fails
      */
-    public void placeOrder() throws OrderException, PaymentException {
+    public void placeOrder() throws IllegalStateException, PaymentException {
         if (paymentMethod == null) {
-            throw new OrderException("Payment method not set!", 401);
+            throw new IllegalStateException("Payment method not set!");
         }
         boolean success = paymentMethod.process(totalPrice);
         if (!success) {
-            throw new OrderException("Payment failed!", 402);
+            throw new PaymentException("Payment failed!", null);
         }
         this.isPaid = true;
         System.out.println("Order placed successfully!");

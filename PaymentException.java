@@ -1,9 +1,8 @@
 /**
  * Exception thrown when a payment operation fails.
- * This exception encapsulates details about the failed payment attempt
- * to provide context for error handling.
+ * This exception extends RuntimeException for unchecked exception behavior.
  */
-public class PaymentException extends Exception {
+public class PaymentException extends RuntimeException {
     /** The payment object that failed during processing */
     private final Payment failedPayment;
 
